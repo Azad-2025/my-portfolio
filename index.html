@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammed Salah Uddin - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      /* Translucent dark glass background for readable texts */
+      --bg-primary: rgba(0, 0, 0, 0.45);
+      --bg-secondary: rgba(18, 18, 18, 0.65);
+      --bg-card: rgba(25, 25, 25, 0.7);
+      --text-main: #ffffff;
+      --text-muted: #e0e0e0;
+      --accent: #ffd700;
+      --accent-hover: #e5c45c;
+      --border: rgba(255, 255, 255, 0.25);
+      --radius: 20px;
+      --shadow: 0 16px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Light Theme - High Contrast Colors Fixed */
+    [data-theme="light"] {
+      --bg-primary: rgba(255, 255, 255, 0.85);
+      --bg-secondary: rgba(255, 255, 255, 0.92);
+      --bg-card: rgba(245, 245, 247, 0.95);
+      --text-main: #0a0a0a;
+      --text-muted: #2c2c2c;
+      --accent: #b37900;
+      --accent-hover: #8f6000;
+      --border: rgba(0, 0, 0, 0.25);
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: none !important;
+    }
+
+    body {
+      background-image: url('./23.jpg') !important;
+      background-size: cover !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      background-attachment: fixed !important;
+      background-color: #121212;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 20px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .sunlight-container, .birds-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .sun-glow {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 235, 150, 0.3) 0%, rgba(255, 180, 50, 0.08) 60%, transparent 80%);
+      border-radius: 50%;
+      animation: sunPulse 6s ease-in-out infinite alternate;
+    }
+
+    .bird {
+      position: absolute;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cpath fill='%23ffffff' opacity='0.9' d='M0,15 Q12.5,0 25,15 Q37.5,0 50,15 Q37.5,10 25,20 Q12.5,10 0,15 Z'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: flyAcross 18s linear infinite, wingFlap 0.6s ease-in-out infinite alternate;
+    }
+
+    .bird-1 { width: 28px; height: 18px; top: 12%; left: -10%; animation-delay: 0s, 0s; }
+    .bird-2 { width: 22px; height: 14px; top: 20%; left: -15%; animation-delay: 3s, 0.2s; }
+    .bird-3 { width: 18px; height: 12px; top: 16%; left: -18%; animation-delay: 5s, 0.1s; }
+
+    @keyframes flyAcross {
+      0% { left: -10%; transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { left: 110%; transform: translateY(10px); }
+    }
+
+    @keyframes wingFlap {
+      0% { transform: scaleY(1); }
+      100% { transform: scaleY(0.3); }
+    }
+
+    @keyframes sunPulse {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      100% { transform: scale(1.1); opacity: 0.9; }
+    }
+
+    .theme-toggle-btn {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.1) rotate(15deg);
+      border-color: var(--accent);
+    }
+
+    .container {
+      display: flex;
+      align-items: flex-start;
+      gap: 25px;
+      max-width: 1200px;
+      width: 100%;
+      animation: pageEntrance 0.8s ease-out forwards;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes pageEntrance {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sidebar {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      width: 290px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 40px;
+      z-index: 5;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .avatar-box {
+      width: 130px;
+      height: 130px;
+      background: var(--bg-card);
+      border-radius: 30px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .avatar-box:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .avatar-box img.active-img {
+      opacity: 1;
+    }
+
+    .name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      border: 1px solid var(--border);
+    }
+
+    .badge:hover {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .separator {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 25px;
+    }
+
+    .contact-list {
+      width: 100%;
+      list-style: none;
+      text-align: left;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateX(5px);
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--bg-primary);
+      color: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
+    }
+
+    .contact-item:hover .contact-icon {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(179, 121, 0, 0.4);
+    }
+
+    .contact-info p {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .contact-info span, .contact-info a {
+      font-size: 0.8rem;
+      color: var(--text-main);
+      font-weight: 500;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .contact-info a:hover {
+      color: var(--accent);
+    }
+
+    .social-list {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      list-style: none;
+      margin-top: 5px;
+    }
+
+    .social-link {
+      width: 35px;
+      height: 35px;
+      background: var(--bg-card);
+      color: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+    }
+
+    .social-link:hover {
+      color: #ffffff;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .main-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0 30px 30px 30px;
+      flex-grow: 1;
+      min-width: 0;
+      box-shadow: var(--shadow);
+      position: relative;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: var(--bg-card);
+      border-bottom-left-radius: 20px;
+      border-top-right-radius: var(--radius);
+      border-left: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 25px;
+      display: flex;
+      gap: 18px;
+      z-index: 100;
+      width: fit-content;
+      margin-left: auto;
+      margin-bottom: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link.active::after, .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active, .nav-link:hover {
+      color: var(--accent);
+    }
+
+    .section {
+      display: block;
+      margin-bottom: 50px;
+      padding-top: 20px;
+      clear: both;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    .main-content:hover .section-title::after {
+      width: 60px;
+    }
+
+    .about-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .about-details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .about-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .about-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .about-card-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--bg-primary);
+      color: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .about-card:hover .about-card-icon {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .about-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .about-card p, .about-card ul {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .about-card ul {
+      padding-left: 18px;
+      margin-top: 5px;
+    }
+
+    .about-card ul li {
+      margin-bottom: 5px;
+    }
+
+    .home-hero {
+      margin-bottom: 25px;
+    }
+
+    .home-name {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 5px;
+    }
+
+    .home-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    .home-intro {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      line-height: 1.6;
+      max-width: 650px;
+      margin-bottom: 25px;
+    }
+
+    .home-btn-group {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-main);
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .home-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-primary);
+      color: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .stat-card:hover .stat-icon {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .stat-info h5 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .stat-info p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .services-grid, .skills-grid, .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .service-card, .skill-card, .portfolio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .service-card {
+      display: flex;
+      gap: 15px;
+    }
+
+    .service-card:hover, .skill-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.2);
+    }
+
+    .service-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 5px;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--border);
+      margin-bottom: 30px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(6px);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: -26px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--bg-card);
+    }
+
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .timeline-date {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 4px 0 8px;
+    }
+
+    .timeline-desc {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .timeline-desc ul {
+      margin-left: 15px;
+      margin-top: 5px;
+    }
+
+    .skill-card h5 {
+      color: var(--accent);
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .skill-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .portfolio-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--accent);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 2.5rem;
+    }
+
+    .portfolio-card:hover .card-img {
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-content h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .card-content p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 10px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .form-input, .form-textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 15px;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      font-weight: 500;
+      outline: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background: var(--bg-card);
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .submit-btn:hover {
+      background: var(--accent);
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 900px) {
+      body {
+        padding: 20px 10px;
+      }
+      .theme-toggle-btn {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        position: relative;
+        top: 0;
+      }
+      .about-details-grid {
+        grid-template-columns: 1fr;
+      }
+      .home-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .services-grid, .skills-grid, .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      .main-content {
+        padding: 20px;
+      }
+      .navbar {
+        position: relative;
+        top: 0;
+        margin-left: 0;
+        border-radius: var(--radius);
+        margin-bottom: 25px;
+        justify-content: center;
+        border: 1px solid var(--border);
+        flex-wrap: wrap;
+        padding: 10px 15px;
+        gap: 12px;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .home-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sunlight Effect Overlay -->
+  <div class="sunlight-container">
+    <div class="sun-glow"></div>
+  </div>
+
+  <!-- Animated Flying Birds Overlay -->
+  <div class="birds-container">
+    <div class="bird bird-1"></div>
+    <div class="bird bird-2"></div>
+    <div class="bird bird-3"></div>
+  </div>
+
+  <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme">
+    <i class="fa-solid fa-sun" id="themeIcon"></i>
+  </button>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="avatar-box" id="avatarSlider">
+        <img src="D:\my\Protfolio\Images\azad1.jpg" alt="Muhammed Salah Uddin 1" class="active-img">
+        <img src="D:\my\Protfolio\Images\azad2.jpg" alt="Muhammed Salah Uddin 2">
+        <img src="D:\my\Protfolio\Images\azad3.jpg" alt="Muhammed Salah Uddin 3">
+        <img src="D:\my\Protfolio\Images\azad4.jpg" alt="Muhammed Salah Uddin 4">
+        <img src="D:\my\Protfolio\Images\azad5.jpg" alt="Muhammed Salah Uddin 5">
+        <img src="D:\my\Protfolio\Images\azad6.jpg" alt="Muhammed Salah Uddin 6">
+      </div>
+
+      <h1 class="name">Muhammed Salah Uddin (Azad)</h1>
+      <span class="badge">SQA Engineer & Data Analyst</span>
+
+      <div class="separator"></div>
+
+      <ul class="contact-list">
+        <li class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="contact-info">
+            <p>Working at</p>
+            <span>Manager, AJM Artificial</span>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="contact-icon"><i class="fa-regular fa-envelope"></i></div>
+          <div class="contact-info">
+            <p>Email</p>
+            <a href="mailto:salahuddinazad01631@gmail.com">salahuddinazad...</a>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div class="contact-info">
+            <p>Phone</p>
+            <span>+880 1305-430838</span>
+          </div>
+        </li>
+        <li class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="contact-info">
+            <p>Location</p>
+            <span>Mirpur, Dhaka</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="separator"></div>
+
+      <ul class="social-list">
+        <li><a href="#" class="social-link" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+        <li><a href="#" class="social-link" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a></li>
+        <li><a href="#" class="social-link" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+        <li><a href="#" class="social-link" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></li>
+        <li><a href="#" class="social-link" target="_blank" title="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <nav class="navbar">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- 1. Home Section -->
+      <section id="home" class="section">
+        <div class="home-hero">
+          <h1 class="home-name">Muhammed Salah Uddin (Azad)</h1>
+          <h3 class="home-title">SQA Engineer & Data Analyst | CSE Graduate</h3>
+          <p class="home-intro">
+            Passionate Software Quality Assurance Engineer and Data Analyst dedicated to delivering bug-free applications and data-driven analytical insights.
+          </p>
+
+          <div class="home-btn-group">
+            <a href="#projects" class="btn-primary"><i class="fa-solid fa-eye"></i> View Projects</a>
+            <a href="#" class="btn-secondary" download><i class="fa-solid fa-download"></i> Download CV</a>
+          </div>
+        </div>
+
+        <div class="home-stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+            <div class="stat-info">
+              <h5>JIRA, Postman</h5>
+              <p>Key Skills</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-user-gear"></i></div>
+            <div class="stat-info">
+              <h5>SQA & Analytics</h5>
+              <p>Experience</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-diagram-project"></i></div>
+            <div class="stat-info">
+              <h5>5+ Projects</h5>
+              <p>Completed</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
+            <div class="stat-info">
+              <h5>3+ Certs</h5>
+              <p>Certifications</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. About Section -->
+      <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <p class="about-text">
+          I am a dedicated Computer Science & Engineering graduate with hands-on experience in Software Quality Assurance (SQA), Data Analytics, and Managerial leadership. With a strong analytical mindset, I bridge software testing precision with data-driven decision making to deliver reliable and high-performing software solutions.
+        </p>
+
+        <div class="about-details-grid">
+          <div class="about-card">
+            <div class="about-card-header">
+              <div class="about-card-icon"><i class="fa-solid fa-user-astronaut"></i></div>
+              <h4>Who I Am</h4>
+            </div>
+            <p>
+              I am Muhammed Salah Uddin — a versatile SQA Engineer, Data Analyst, and Manager based in Dhaka, Bangladesh. I specialize in software testing, defect tracking, and data analysis.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card-header">
+              <div class="about-card-icon"><i class="fa-solid fa-bullseye"></i></div>
+              <h4>Career Objective</h4>
+            </div>
+            <p>
+              To leverage my background in SQA and Data Analytics to drive quality assurance standards, optimize technical workflows, and deliver data-backed value to modern software organizations.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card-header">
+              <div class="about-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+              <h4>Education</h4>
+            </div>
+            <p>
+              <strong>B.Sc. in Computer Science & Engineering</strong><br>
+              Green University of Bangladesh<br>
+              <span style="font-size: 0.8rem; color: var(--accent);">Focus on Software Engineering, Database Systems (MySQL), Data Structures & Analysis.</span>
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card-header">
+              <div class="about-card-icon"><i class="fa-solid fa-briefcase"></i></div>
+              <h4>Professional Background</h4>
+            </div>
+            <p>
+              Currently working as <strong>Manager at AGM Artificial</strong>. Served as <strong>Data Analyst at TechnoNext Software Ltd</strong> (Feb 2026 – Jun 2026)[cite: 1] and completed an <strong>SQA Internship at Iching Software Lab</strong>[cite: 1].
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card-header">
+              <div class="about-card-icon"><i class="fa-solid fa-gears"></i></div>
+              <h4>Working Approach</h4>
+            </div>
+            <ul>
+              <li>Rigorous SDLC & STLC testing standards.</li>
+              <li>Data-driven analysis and reporting accuracy.</li>
+              <li>Structured Test Case design and defect management in JIRA.</li>
+            </ul>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card-header">
+              <div class="about-card-icon"><i class="fa-solid fa-bolt"></i></div>
+              <h4>Core Strengths</h4>
+            </div>
+            <ul>
+              <li>Data analysis, pattern identification, & reporting.</li>
+              <li>Fast & accurate data entry (45+ WPM with high accuracy).</li>
+              <li>Strong problem-solving, collaboration, & team management.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Skills Section -->
+      <section id="skills" class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h5>Testing & QA Tools</h5>
+            <p>JIRA, Postman (API), Test Case Design, Defect Reporting, SDLC/STLC</p>
+          </div>
+          <div class="skill-card">
+            <h5>Data Analytics & DB</h5>
+            <p>Data Analysis, MySQL, Excel & Google Sheets Analytics, Reporting</p>
+          </div>
+          <div class="skill-card">
+            <h5>Programming & Web</h5>
+            <p>C, Java, Python, HTML, CSS</p>
+          </div>
+          <div class="skill-card">
+            <h5>Speed & Accuracy</h5>
+            <p>Typing Speed: 45+ WPM with High Accuracy, Data Cleaning</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Projects Section -->
+      <section id="projects" class="section">
+        <h2 class="section-title">Projects</h2>
+        <div class="portfolio-grid">
+          <div class="portfolio-card">
+            <div class="card-img"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="card-content">
+              <h4>Data Analysis & Reporting Project</h4>
+              <p>Analyzed operational and software datasets, performing data cleaning, trend analysis, and insights generation.</p>
+              <span class="card-tag">#DataAnalytics #Excel #MySQL</span>
+            </div>
+          </div>
+          <div class="portfolio-card">
+            <div class="card-img"><i class="fa-solid fa-vial-circle-check"></i></div>
+            <div class="card-content">
+              <h4>E-Commerce SQA Project</h4>
+              <p>Designed end-to-end test cases, bug reports, and regression suites for an e-commerce platform.</p>
+              <span class="card-tag">#SQA #ManualTesting #JIRA</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Experience Section -->
+      <section id="experience" class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4 class="timeline-title">Manager</h4>
+            <div class="timeline-date">Present | AJM Artificial</div>
+            <div class="timeline-desc">Leading operational and technical workflows to drive team performance and quality standards.</div>
+          </div>
+
+          <div class="timeline-item">
+            <h4 class="timeline-title">Data Analyst</h4>
+            <div class="timeline-date">22 Feb 2026 — 22 Jun 2026 (4 Months) | TechnoNext Software Ltd</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Analyzed complex datasets to extract key operational and performance metrics.</li>
+                <li>Cleaned, processed, and validated data using SQL, Excel, and spreadsheet tools.</li>
+                <li>Created analytical reports to assist stakeholders in data-driven decision making.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <h4 class="timeline-title">Software Quality Assurance (SQA) Intern</h4>
+            <div class="timeline-date">Nov 2025 — Dec 2025 | Iching Software Lab, Bangladesh</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Prepared comprehensive test cases, test scenarios, and defect reports.</li>
+                <li>Executed functional, UI, and regression testing using SDLC and STLC methodologies.</li>
+                <li>Collaborated with QA team and developers to identify and resolve bugs efficiently.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Services Section -->
+      <section id="services" class="section">
+        <h2 class="section-title">Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            <div>
+              <h4>Data Analytics & Reporting</h4>
+              <p>Data extraction, data cleaning, trend visualization, SQL querying, and executive reporting using Excel and analytical tools.</p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-vial"></i></div>
+            <div>
+              <h4>Software Quality Assurance</h4>
+              <p>Manual testing, test case design, functional & regression testing, bug tracking via JIRA, and API testing with Postman.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Contact Section -->
+      <section id="contact" class="section">
+        <h2 class="section-title">Contact</h2>
+        <p class="about-text">Feel free to reach out to me for any SQA, Data Analysis, or Technical Management opportunities.</p>
+        
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+          <input type="text" class="form-input" placeholder="Full Name" required>
+          <input type="email" class="form-input" placeholder="Email Address" required>
+          <textarea class="form-textarea" placeholder="Your Message..." required></textarea>
+          <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        </form>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    /* --- 1. Theme Toggle --- */
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+    });
+
+    /* --- 2. Avatar Slider --- */
+    const sliderImages = document.querySelectorAll('#avatarSlider img');
+    let currentImgIndex = 0;
+
+    function changeProfileImage() {
+      sliderImages[currentImgIndex].classList.remove('active-img');
+      currentImgIndex = (currentImgIndex + 1) % sliderImages.length;
+      sliderImages[currentImgIndex].classList.add('active-img');
+    }
+    setInterval(changeProfileImage, 5000);
+
+    /* --- 3. Scroll Navbar Active Link --- */
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= (sectionTop - 150)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
