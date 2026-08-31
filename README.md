@@ -8,7 +8,7 @@ I am a Computer Science & Engineering graduate with experience in Software Quali
 
 ## 🌐 Live Portfolio
 
-👉 [Visit My Live Portfolio]([YOUR-LIVE-LINK-HERE](https://azad-2025.github.io/my-portfolio/))
+👉 [Visit My Live Portfolio](https://azad-2025.github.io/my-portfolio/)
 
 ## 🛠️ Skills
 
