@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Reference Theme Palette */
+    --emerald-green: #009B77;
+    --teal: #16B8A6;
+    --soft-sage: #91B8A7;
+    --muted-warm-gray: #B6ADA8;
+    --dusty-rose: #D58B8D;
+    --crimson-red: #F32F45;
+
+    /* Theme Backgrounds & Surfaces (Dark default) */
+    --bg-primary: #080D12;
+    --bg-secondary: #10171F;
+    --bg-card: #0C141C;
+    --bg-card-subtle: #131E2A;
+
+    /* Typography */
+    --text-primary: #F4F7FA;
+    --text-secondary: #B8C4D2;
+    --text-muted: #8292A3;
+
+    /* Gradients */
+    --gradient-theme: linear-gradient(90deg, #009B77 0%, #16B8A6 22%, #91B8A7 45%, #B6ADA8 60%, #D58B8D 78%, #F32F45 100%);
+    --gradient-theme-diagonal: linear-gradient(135deg, #009B77 0%, #16B8A6 25%, #91B8A7 45%, #B6ADA8 60%, #D58B8D 78%, #F32F45 100%);
+    --gradient-border: linear-gradient(135deg, rgba(0, 155, 119, 0.45) 0%, rgba(22, 184, 166, 0.35) 25%, rgba(145, 184, 167, 0.2) 48%, rgba(213, 139, 141, 0.35) 75%, rgba(243, 47, 69, 0.45) 100%);
+    --gradient-border-hover: linear-gradient(135deg, #009B77 0%, #16B8A6 28%, #91B8A7 48%, #D58B8D 75%, #F32F45 100%);
+
+    --border: rgba(22, 184, 166, 0.2);
+    --radius: 20px;
+    --shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+    --glass-blur: 16px;
+  }
+
+  [data-theme="light"] {
+    --bg-primary: #F3F6F9;
+    --bg-secondary: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-card-subtle: #F0F4F8;
+
+    --text-primary: #0A1118;
+    --text-secondary: #334155;
+    --text-muted: #64748B;
+
+    --gradient-border: linear-gradient(135deg, rgba(0, 155, 119, 0.35) 0%, rgba(22, 184, 166, 0.3) 25%, rgba(213, 139, 141, 0.3) 75%, rgba(243, 47, 69, 0.35) 100%);
+    --border: rgba(22, 184, 166, 0.25);
+    --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  }
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Background Scene with emerald-crimson ambient glow */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.5s ease;
+}
+
+[data-theme="dark"] .bg-canvas {
+  background: 
+    radial-gradient(circle at 10% 15%, rgba(0, 155, 119, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 90% 20%, rgba(243, 47, 69, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(22, 184, 166, 0.06) 0%, transparent 55%),
+    linear-gradient(180deg, #080D12 0%, #0B1118 50%, #080D12 100%);
+}
+
+[data-theme="light"] .bg-canvas {
+  background: 
+    radial-gradient(circle at 10% 15%, rgba(0, 155, 119, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 90% 20%, rgba(243, 47, 69, 0.08) 0%, transparent 45%),
+    linear-gradient(180deg, #F3F6F9 0%, #E9EFF5 50%, #F3F6F9 100%);
+}
+
+/* Sunlight / Ambient Glow Overlay with theme colors */
+.sunlight-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.sun-glow {
+  position: absolute;
+  top: -120px;
+  right: -100px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(22, 184, 166, 0.18) 0%, rgba(243, 47, 69, 0.08) 50%, transparent 75%);
+  border-radius: 50%;
+  animation: sunPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes sunPulse {
+  0% { transform: scale(0.92); opacity: 0.6; }
+  100% { transform: scale(1.18); opacity: 0.95; }
+}
+
+/* Birds Overlay */
+.birds-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.bird {
+  position: absolute;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cpath fill='%2316B8A6' opacity='0.75' d='M0,15 Q12.5,0 25,15 Q37.5,0 50,15 Q37.5,10 25,20 Q12.5,10 0,15 Z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: flyAcross 22s linear infinite, wingFlap 0.6s ease-in-out infinite alternate;
+}
+
+.bird-1 { width: 28px; height: 16px; top: 12%; left: -10%; animation-delay: 0s, 0s; }
+.bird-2 { width: 22px; height: 13px; top: 22%; left: -15%; animation-delay: 5s, 0.2s; }
+.bird-3 { width: 17px; height: 11px; top: 18%; left: -20%; animation-delay: 9s, 0.1s; }
+
+@keyframes flyAcross {
+  0% { left: -10%; transform: translateY(0px); }
+  50% { transform: translateY(-22px); }
+  100% { left: 110%; transform: translateY(14px); }
+}
+
+@keyframes wingFlap {
+  0% { transform: scaleY(1); }
+  100% { transform: scaleY(0.35); }
+}
+
+/* Reusable Gradient Utilities */
+.text-gradient-theme {
+  background: var(--gradient-theme);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.bg-gradient-theme {
+  background: var(--gradient-theme);
+}
+
+.bg-gradient-theme-diagonal {
+  background: var(--gradient-theme-diagonal);
+}
+
+/* Primary Button with Theme Gradient */
+.btn-gradient-primary {
+  background: var(--gradient-theme);
+  color: #080D12 !important;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(22, 184, 166, 0.35);
+}
+
+.btn-gradient-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(243, 47, 69, 0.35), 0 4px 14px rgba(22, 184, 166, 0.3);
+}
+
+.btn-gradient-primary:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button with subtle dark background and gradient border */
+.btn-gradient-secondary {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-secondary::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: var(--gradient-theme);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.btn-gradient-secondary:hover {
+  transform: translateY(-2px);
+  color: #FFFFFF;
+}
+
+.btn-gradient-secondary:hover::before {
+  opacity: 1;
+}
+
+/* Card with Gradient Border */
+.card-gradient-border {
+  background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box, var(--gradient-border) border-box;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-gradient-border:hover {
+  background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box, var(--gradient-border-hover) border-box;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(22, 184, 166, 0.15);
+}
+
+/* Main Panels */
+.panel-gradient-border {
+  background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box, var(--gradient-border) border-box;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #009B77 0%, #16B8A6 50%, #F32F45 100%);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #16B8A6 0%, #D58B8D 50%, #F32F45 100%);
+}
