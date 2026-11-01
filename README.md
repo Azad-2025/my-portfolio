@@ -33,9 +33,15 @@ The project uses a modern frontend development setup.
 
 Some of the projects showcased in my portfolio:
 
-1. TurfBD — Sports Turf Booking Platform
-2. Bengali Nostalgia Score Card App
-3. Foodie BD — Bangladesh Food Discovery & Journey Map
+1. **TurfBD — Sports Turf Booking Platform**
+   - 🌐 Live: [turfbd-beta.onrender.com](https://turfbd-beta.onrender.com)
+   - 💻 GitHub: [github.com/Azad-2025/TurBD](https://github.com/Azad-2025/TurBD)
+2. **Bengali Nostalgia Score Card App**
+   - 🌐 Live: [bengali-nostalgia-app.vercel.app](https://bengali-nostalgia-app.vercel.app/)
+   - 💻 GitHub: [github.com/Azad-2025/bengali-nostalgia-app](https://github.com/Azad-2025/bengali-nostalgia-app)
+3. **Foodie BD — Bangladesh Food Discovery & Journey Map**
+   - 🌐 Live: [foodie-bd.vercel.app](https://foodie-bd.vercel.app)
+   - 💻 GitHub: [github.com/Azad-2025/Foodie-BD](https://github.com/Azad-2025/Foodie-BD)
 4. Data Analytics & Executive Reporting System
 5. E-Commerce Platform SQA Test Suite
 6. RESTful API Testing & Verification Suite

@@ -140,6 +140,8 @@ const PROJECTS: ProjectItem[] = [
     metrics: 'Pre-launch Prototype | Bangladesh Sports Booking',
     deliverables: ['PWA Venue Booking Architecture', 'Role-Based Access System', 'QR Gate Pass Specification', 'Admin & Payout Workflows'],
     icon: 'web',
+    liveUrl: 'https://turfbd-beta.onrender.com',
+    githubUrl: 'https://github.com/Azad-2025/TurBD',
     keyFeatures: [
       'Sports venue discovery, search, and filtering',
       'Booking and slot availability management',
@@ -212,6 +214,8 @@ const PROJECTS: ProjectItem[] = [
       'Downloadable Foodie Card Export Specifications'
     ],
     icon: 'web',
+    liveUrl: 'https://foodie-bd.vercel.app',
+    githubUrl: 'https://github.com/Azad-2025/Foodie-BD',
     problemStatement: 'Information about regional Bangladeshi foods can be scattered across websites and social media. Foodie BD aims to bring regional food discovery, district-based exploration, personal tasting records, and shareable journey progress together in one platform.',
     geographicScope: '8 divisions & 64 districts of Bangladesh (Target Coverage Scope)',
     keyFeatures: [
